@@ -1,3 +1,3 @@
-# datamining-mnist-demo
+# data-mining-mnist-demo
 
-[Try online](https://offdroid.github.io/datamining-mnist-demo/static/index.html)
+[Try online](https://offdroid.github.io/data-mining-mnist-demo/static/index.html)
