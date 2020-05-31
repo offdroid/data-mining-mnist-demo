@@ -38,14 +38,14 @@ function drawConfidenceChart() {
   chart.draw(data, options);
 }
 
+const rgb = tf.tensor1d([0.2989, 0.587, 0.114])
 function predict() {
   // TODO Predict
 
   // Render the preview aka what the network receives
   tensor = tf.browser.fromPixels(canvas);
   tensor = tf.image.resizeBilinear(tensor, [28, 28]);
-  // TODO Proper grayscale
-  tensor = tensor.mean(2).toFloat().div(255.0);
+  tensor = tf.sum(tensor.mul(rgb.toFloat().div(255.0)), 2);
   tf.browser.toPixels(tensor, previewCanvas);
 
   // Populate confidence chart
