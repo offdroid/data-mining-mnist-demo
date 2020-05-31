@@ -74,18 +74,18 @@ ctx.lineWidth = 15;
 ctx.strokeStyle = "#FFFFFF";
 
 let drawing = false;
-canvas.addEventListener("mousedown", (e) => {
+canvas.addEventListener("mousedown", e => {
   drawing = true;
   updatePosition(e);
 });
-canvas.addEventListener("click", (e) => {
+canvas.addEventListener("click", e => {
   // Register and draw single taps/clicks, events for which `mousemove` normally does not fire
   drawing = true;
   updatePosition(e);
   draw(e);
   drawing = false;
 });
-canvas.addEventListener("mousemove", (e) => draw(e));
+canvas.addEventListener("mousemove", draw);
 canvas.addEventListener("mouseup", () => stopDraw());
 canvas.addEventListener("mouseout", () => stopDraw());
 
@@ -116,7 +116,7 @@ function draw(e) {
 // Adpoted from Ben Centra with minor modifications
 canvas.addEventListener(
   "touchstart",
-  function (e) {
+  e => {
     mousePos = getTouchPos(canvas, e);
     let touch = e.touches[0];
     let mouseEvent = new MouseEvent("mousedown", {
@@ -129,7 +129,7 @@ canvas.addEventListener(
 );
 canvas.addEventListener(
   "touchend",
-  function (e) {
+  e => {
     let mouseEvent = new MouseEvent("mouseup", {});
     canvas.dispatchEvent(mouseEvent);
   },
@@ -137,7 +137,7 @@ canvas.addEventListener(
 );
 canvas.addEventListener(
   "touchmove",
-  function (e) {
+  e => {
     let touch = e.touches[0];
     let mouseEvent = new MouseEvent("mousemove", {
       clientX: touch.clientX,
