@@ -43,7 +43,7 @@ function predict() {
 
   // Render the preview aka what the network receives
   tensor = tf.browser.fromPixels(canvas);
-  tensor = tf.image.resizeNearestNeighbor(tensor, [28, 28]);
+  tensor = tf.image.resizeBilinear(tensor, [28, 28]);
   // TODO Proper grayscale
   tensor = tensor.mean(2).toFloat().div(255.0);
   tf.browser.toPixels(tensor, previewCanvas);
