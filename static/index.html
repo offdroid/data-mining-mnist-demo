@@ -1,0 +1,144 @@
+<html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <meta content="utf-8" http-equiv="encoding" />
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <!-- TensorFlow -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+    <!-- Google Charts -->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css"
+    />
+  </head>
+  <body
+    class="main"
+    style="display: flex; min-height: 100vh; flex-direction: column;"
+  >
+    <div class="content" style="flex: 1;">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            MNIST Demo
+          </h1>
+          <h2 class="subtitle">Deep Learning Software: TensorFlow</h2>
+        </div>
+      </div>
+      <div class="container">
+        <div class="columns">
+          <div class="column is-narrow">
+            <div class="container is-fluid">
+              <canvas
+                id="inputCanvas"
+                width="224"
+                height="224"
+                style="border: 1px solid #c3c3c3; background: black;"
+              >
+                Due to technical limitations of your browser this demo cannot
+                run
+              </canvas>
+
+              <div class="field has-addons" style="margin-top: 5px;">
+                <p class="control">
+                  <a class="button is-info" id="predict">
+                    Predict
+                  </a>
+                </p>
+                <p class="control">
+                  <a class="button is-outlined" id="clear">
+                    Clear
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <p>
+              To get started draw a digit in the box and hit <em>predict</em>. A
+              NN, implemented in TensorFlow, will then give it's best guess as
+              to what number you wrote.
+            </p>
+            <p>
+              The model was trained on the
+              <a href="http://yann.lecun.com/exdb/mnist">MNIST dataset</a>,
+              converted over with TensorFlow.js Converter to run locally on your
+              device
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="columns is-multiline">
+        <div class="column is-narrow">
+          <article class="message is-dark">
+            <div class="message-header">
+              <p>Preproccessed input</p>
+            </div>
+            <div class="message-body">
+              <canvas
+                id="previewCanvas"
+                width="28"
+                height="28"
+                style="border: 1px solid #c3c3c3; background: black;"
+              ></canvas>
+              <p>scaled down to grayscale 28x28</p>
+            </div>
+          </article>
+        </div>
+        <div class="column">
+          <article class="message is-dark">
+            <div class="message-header">
+              <p>Classification</p>
+            </div>
+            <div class="message-body">
+              <p class="is-size-2">
+                0
+              </p>
+            </div>
+          </article>
+        </div>
+        <div class="column">
+          <article class="message is-dark">
+            <div class="message-header">
+              <p>Confidence</p>
+            </div>
+            <div class="message-body">
+              <div id="confidence_chart"></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer" style="margin-top: 10px;">
+      <nav class="level">
+        <div class="level-left">
+          by&nbsp;<strong>Filip Skubacz</strong>.&nbsp;Code available on&nbsp;
+          <a href="https://github.com/offdroid/datamining-mnist-demo">Github</a>
+        </div>
+        <div class="level-right">
+          <div class="content">
+            <a
+              href="https://campus.tum.de/tumonline/wbLv.wbShowLVDetail?pStpSpNr=950464870"
+              >Data Mining Seminar
+            </a>
+            &nbsp;Summer Semester 2020
+          </div>
+        </div>
+      </nav>
+      <div class="content has-text-centered">
+        <p></p>
+      </div>
+    </footer>
+    <script src="index.js"></script>
+  </body>
+</html>
