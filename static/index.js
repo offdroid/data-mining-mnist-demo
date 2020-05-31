@@ -40,6 +40,15 @@ function drawConfidenceChart() {
 
 function predict() {
   // TODO Predict
+
+  // Render the preview aka what the network receives
+  tensor = tf.browser.fromPixels(canvas);
+  tensor = tf.image.resizeNearestNeighbor(tensor, [28, 28]);
+  // TODO Proper grayscale
+  tensor = tensor.mean(2).toFloat().div(255.0);
+  tf.browser.toPixels(tensor, previewCanvas);
+
+  // Populate confidence chart
   google.charts.load("current", { packages: ["corechart"] });
   google.charts.setOnLoadCallback(drawConfidenceChart);
 }
@@ -79,12 +88,6 @@ let position = { x: 0, y: 0 };
 
 function stopDraw() {
   isDrawing = false;
-  // Render the preview aka what the network receives
-  tensor = tf.browser.fromPixels(canvas);
-  tensor = tf.image.resizeNearestNeighbor(tensor, [28, 28]);
-  // TODO Proper grayscale
-  tensor = tensor.mean(2).toFloat().div(255.0);
-  tf.browser.toPixels(tensor, previewCanvas);
 }
 
 function updatePosition(e) {

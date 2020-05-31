@@ -1,0 +1,7 @@
+#previewCanvas {
+  border: 1px solid #c3c3c3;
+  background: black;
+  width: 224;
+  height: 224;
+  image-rendering: pixelated;
+}
