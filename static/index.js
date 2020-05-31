@@ -1,17 +1,21 @@
 // The following code includes an excerpt from "Using Touch Events with the HTML5 Canvas" by Ben Centra
 // http://bencentra.com/code/2014/12/05/html5-canvas-touch-events.html
-//
-const predictButton = document.getElementById("predict");
-predictButton.addEventListener("click", () => {
-  predictButton.disabled = true;
-  predictButton.classList.add("is-loading");
-  predict();
-  predictButton.classList.remove("is-loading");
-  predictButton.disabled = false;
+
+const classify_btn = document.getElementById("classify");
+classify_btn.addEventListener("click", () => {
+  // Disable the button and show a loading animation
+  classify_btn.disabled = true;
+  classify_btn.classList.add("is-loading");
+  
+  classify();
+  // Revert to normal state
+  classify_btn.classList.remove("is-loading");
+  classify_btn.disabled = false;
 });
 
 function drawConfidenceChart() {
-  var data = google.visualization.arrayToDataTable([
+  // Currently a placeholder
+  let data = google.visualization.arrayToDataTable([
     ["Digit", "Density"],
     ["0", 0.94],
     ["1", 0.49],
@@ -25,22 +29,22 @@ function drawConfidenceChart() {
     ["9", 0.65],
   ]);
 
-  var options = {
+  let options = {
     width: 300,
     height: 400,
     backgroundColor: { fill: "transparent" },
     legend: { position: "none" },
     chartArea: { width: "100%", height: "80%" },
   };
-  var chart = new google.visualization.ColumnChart(
+  let chart = new google.visualization.ColumnChart(
     document.getElementById("confidence_chart")
   );
   chart.draw(data, options);
 }
 
-const rgb = tf.tensor1d([0.2989, 0.587, 0.114])
-function predict() {
-  // TODO Predict
+const rgb = tf.tensor1d([0.2989, 0.587, 0.114]);
+function classify() {
+  // TODO Classify the digit
 
   // Render the preview aka what the network receives
   tensor = tf.browser.fromPixels(canvas);
@@ -60,6 +64,7 @@ const previewCtx = previewCanvas.getContext("2d");
 
 const clearButton = document.getElementById("clear");
 clearButton.addEventListener("click", () => {
+  // Clear both canvases
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   previewCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
 });
@@ -108,13 +113,13 @@ function draw(e) {
 }
 
 // Handle touch inputs just like mouse inputs.
-// Code by Ben Centra
+// Adpoted from Ben Centra with minor modifications
 canvas.addEventListener(
   "touchstart",
   function (e) {
     mousePos = getTouchPos(canvas, e);
-    var touch = e.touches[0];
-    var mouseEvent = new MouseEvent("mousedown", {
+    let touch = e.touches[0];
+    let mouseEvent = new MouseEvent("mousedown", {
       clientX: touch.clientX,
       clientY: touch.clientY,
     });
@@ -125,7 +130,7 @@ canvas.addEventListener(
 canvas.addEventListener(
   "touchend",
   function (e) {
-    var mouseEvent = new MouseEvent("mouseup", {});
+    let mouseEvent = new MouseEvent("mouseup", {});
     canvas.dispatchEvent(mouseEvent);
   },
   false
@@ -133,8 +138,8 @@ canvas.addEventListener(
 canvas.addEventListener(
   "touchmove",
   function (e) {
-    var touch = e.touches[0];
-    var mouseEvent = new MouseEvent("mousemove", {
+    let touch = e.touches[0];
+    let mouseEvent = new MouseEvent("mousemove", {
       clientX: touch.clientX,
       clientY: touch.clientY,
     });
@@ -144,7 +149,7 @@ canvas.addEventListener(
 );
 // Get the position of a touch relative to the canvas
 function getTouchPos(canvasDom, touchEvent) {
-  var rect = canvasDom.getBoundingClientRect();
+  let rect = canvasDom.getBoundingClientRect();
   return {
     x: touchEvent.touches[0].clientX - rect.left,
     y: touchEvent.touches[0].clientY - rect.top,
