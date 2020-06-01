@@ -1,3 +1,9 @@
+#inputCanvas {
+  border: 1px solid #c3c3c3;
+  background: black;
+  touch-action: none;
+}
+
 #previewCanvas {
   border: 1px solid #c3c3c3;
   background: black;

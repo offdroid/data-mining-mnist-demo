@@ -35,19 +35,14 @@
           <h1 class="title">
             MNIST Demo
           </h1>
-          <h2 class="subtitle">Deep Learning Software: TensorFlow</h2>
+          <h2 class="subtitle">Neural Networks III: Deep Learning Software</h2>
         </div>
       </div>
       <div class="container">
         <div class="columns">
           <div class="column is-narrow">
             <div class="container is-fluid">
-              <canvas
-                id="inputCanvas"
-                width="224"
-                height="224"
-                style="border: 1px solid #c3c3c3; background: black;"
-              >
+              <canvas id="inputCanvas" width="224" height="224">
                 Due to technical limitations of your browser this demo cannot
                 run
               </canvas>
@@ -68,9 +63,9 @@
           </div>
           <div class="column" style="margin-left: 10px; margin-right: 10px;">
             <p>
-              To get started draw a digit in the box and hit "<em>Classify</em>". A
-              NN, implemented in TensorFlow, will then give it's best guess as
-              to what number you wrote.
+              To get started draw a digit in the box and hit
+              "<em>Classify</em>". A NN, implemented in TensorFlow, will then
+              give it's best guess as to what number you wrote.
             </p>
             <p>
               The model was trained on the
@@ -124,7 +119,9 @@
       <nav class="level">
         <div class="level-left">
           by&nbsp;<strong>Filip Skubacz</strong>.&nbsp;
-          <a href="https://github.com/offdroid/datamining-mnist-demo">View GitHub Repo</a>
+          <a href="https://github.com/offdroid/datamining-mnist-demo"
+            >View GitHub Repo</a
+          >
         </div>
         <div class="level-right">
           <div class="content">
@@ -137,5 +134,7 @@
       </nav>
     </footer>
     <script src="index.js"></script>
+    <script src="touchinput.js"></script>
+    <script src="canvas.js"></script>
   </body>
 </html>
