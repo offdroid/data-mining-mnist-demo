@@ -1,3 +1,15 @@
+function warn_iOSSafari() {
+  let ua = window.navigator.userAgent;
+  let iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
+  let webkit = !!ua.match(/WebKit/i);
+  let iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
+
+  if (iOSSafari) {
+    alert("Drawing does not work well on Safari for iOS and iPadOS");
+  }
+}
+warn_iOSSafari();
+
 const classify_btn = document.getElementById("classify");
 classify_btn.addEventListener("click", () => {
   // Disable the button and show a loading animation
@@ -39,10 +51,18 @@ function drawConfidenceChart() {
   chart.draw(data, options);
 }
 
+function changeOutputVisibility(visible) {
+  let state = visible ? "initial" : "none";
+  document.querySelector("#preproccessed_input_column").style.display = state;
+  document.querySelector("#classification_column").style.display = state;
+  document.querySelector("#confidence_column").style.display = state;
+}
+
 const rgb = tf.tensor1d([0.2989, 0.587, 0.114]);
 function classify() {
   // TODO Classify the digit
 
+  changeOutputVisibility(true);
   // Render the preview aka what the network receives
   tensor = tf.browser.fromPixels(document.querySelector("#inputCanvas"));
   tensor = tf.image.resizeBilinear(tensor, [28, 28]);

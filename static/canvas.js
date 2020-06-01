@@ -8,6 +8,7 @@ clearButton.addEventListener("click", () => {
   // Clear both canvases
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   previewCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+  changeOutputVisibility(false);
 });
 
 ctx.lineCap = "round";

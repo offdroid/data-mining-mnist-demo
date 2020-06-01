@@ -79,7 +79,11 @@
 
     <div class="container">
       <div class="columns is-multiline">
-        <div class="column is-narrow">
+        <div
+          class="column is-narrow"
+          style="display: none;"
+          id="preproccessed_input_column"
+        >
           <article class="message is-dark">
             <div class="message-header">
               <p>Preproccessed input</p>
@@ -90,7 +94,7 @@
             </div>
           </article>
         </div>
-        <div class="column">
+        <div class="column" style="display: none;" id="classification_column">
           <article class="message is-dark">
             <div class="message-header">
               <p>Classification</p>
@@ -102,7 +106,7 @@
             </div>
           </article>
         </div>
-        <div class="column">
+        <div class="column" style="display: none;" id="confidence_column">
           <article class="message is-dark">
             <div class="message-header">
               <p>Confidence</p>
