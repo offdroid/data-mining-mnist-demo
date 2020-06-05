@@ -10,17 +10,18 @@ function warn_iOSSafari() {
 }
 warn_iOSSafari();
 
-const classify_btn = document.getElementById("classify");
-classify_btn.addEventListener("click", () => {
+async function classify_event() {
   // Disable the button and show a loading animation
   classify_btn.disabled = true;
   classify_btn.classList.add("is-loading");
 
-  classify();
+  await classify();
   // Revert to normal state
   classify_btn.classList.remove("is-loading");
   classify_btn.disabled = false;
-});
+}
+const classify_btn = document.getElementById("classify");
+classify_btn.addEventListener("click", () => classify_event());
 
 function changeOutputVisibility(visible) {
   let state = visible ? "initial" : "none";
