@@ -4,8 +4,8 @@ function warn_iOSSafari() {
   let webkit = !!ua.match(/WebKit/i);
   let iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
 
-  if (iOSSafari) {
-    alert("Drawing does not work well on Safari for iOS and iPadOS");
+  if (iOS) {
+    alert("Drawing may not work well on iOS and iPadOS");
   }
 }
 warn_iOSSafari();
@@ -22,21 +22,51 @@ classify_btn.addEventListener("click", () => {
   classify_btn.disabled = false;
 });
 
+function changeOutputVisibility(visible) {
+  let state = visible ? "initial" : "none";
+  document.querySelector("#preproccessed_input_column").style.display = state;
+  document.querySelector("#classification_column").style.display = state;
+  document.querySelector("#confidence_column").style.display = state;
+}
+
+let predictions;
+const rgb = tf.tensor1d([0.2989, 0.587, 0.114]);
+async function classify() {
+  const model = await tf.loadLayersModel("model.json");
+
+  changeOutputVisibility(true);
+  // Render the preview aka what the network receives
+  tensor = tf.browser.fromPixels(document.querySelector("#inputCanvas"));
+  tensor = tf.image.resizeBilinear(tensor, [28, 28]);
+  tensor = tensor.mean(2).div(255).toFloat().expandDims(-1);
+  tf.browser.toPixels(tensor, document.querySelector("#previewCanvas"));
+
+  // For some reason the converted model, wants an extra dimension.
+  // no idea why but .expandDims(0) is a workaround
+  predictions = model.predict(tensor.expandDims(0)).dataSync();
+  // Find the most likely prediction
+  const max_confidence = predictions.reduce(function (a, b) {
+    return Math.max(a, b);
+  });
+  function equals_max_confidence(confidence) {
+    return max_confidence == confidence;
+  }
+
+  const result = predictions.findIndex(equals_max_confidence);
+  document.getElementById("classification").innerHTML = result;
+  // Populate confidence chart
+  google.charts.load("current", { packages: ["corechart"] });
+  google.charts.setOnLoadCallback(drawConfidenceChart);
+}
+
 function drawConfidenceChart() {
-  // Currently a placeholder
-  let data = google.visualization.arrayToDataTable([
-    ["Digit", "Density"],
-    ["0", 0.94],
-    ["1", 0.49],
-    ["2", 0.3],
-    ["3", 0.15],
-    ["4", 0.45],
-    ["5", 0.15],
-    ["6", 0.45],
-    ["7", 0.25],
-    ["8", 0.45],
-    ["9", 0.65],
-  ]);
+  // Prepare the data for visualization
+  // Convert from a typed array to a regular one then add the index to each element
+  const v = Array.prototype.slice
+    .call(predictions)
+    .map((x, i) => [i.toString(), x]);
+  v.unshift(new Array("Digit", "Confidence"));
+  let data = google.visualization.arrayToDataTable(v);
 
   let options = {
     width: 300,
@@ -49,27 +79,4 @@ function drawConfidenceChart() {
     document.getElementById("confidence_chart")
   );
   chart.draw(data, options);
-}
-
-function changeOutputVisibility(visible) {
-  let state = visible ? "initial" : "none";
-  document.querySelector("#preproccessed_input_column").style.display = state;
-  document.querySelector("#classification_column").style.display = state;
-  document.querySelector("#confidence_column").style.display = state;
-}
-
-const rgb = tf.tensor1d([0.2989, 0.587, 0.114]);
-function classify() {
-  // TODO Classify the digit
-
-  changeOutputVisibility(true);
-  // Render the preview aka what the network receives
-  tensor = tf.browser.fromPixels(document.querySelector("#inputCanvas"));
-  tensor = tf.image.resizeBilinear(tensor, [28, 28]);
-  tensor = tf.sum(tensor.mul(rgb.toFloat().div(255.0)), 2);
-  tf.browser.toPixels(tensor, document.querySelector("#previewCanvas"));
-
-  // Populate confidence chart
-  google.charts.load("current", { packages: ["corechart"] });
-  google.charts.setOnLoadCallback(drawConfidenceChart);
 }

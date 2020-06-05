@@ -25,19 +25,15 @@
     style="display: flex; min-height: 100vh; flex-direction: column;"
   >
     <div class="content" style="flex: 1;">
-      <section class="hero is-warning is-small">
-        <div class="hero-body">
-          <div class="container">Work-In-Progress</div>
+      <section class="section">
+        <div class="container">
+          <h1 class="title">MNIST Demo</h1>
+          <h2 class="subtitle">
+            Neural Networks III: Deep Learning Software
+          </h2>
         </div>
       </section>
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title">
-            MNIST Demo
-          </h1>
-          <h2 class="subtitle">Neural Networks III: Deep Learning Software</h2>
-        </div>
-      </div>
+
       <div class="container">
         <div class="columns">
           <div class="column is-narrow">
@@ -79,6 +75,18 @@
 
     <div class="container">
       <div class="columns is-multiline">
+        <div class="column" style="display: none;" id="classification_column">
+          <article class="message is-dark">
+            <div class="message-header">
+              <p>Classification</p>
+            </div>
+            <div class="message-body">
+              <p class="is-size-2" id="classification">
+                0
+              </p>
+            </div>
+          </article>
+        </div>
         <div
           class="column is-narrow"
           style="display: none;"
@@ -94,18 +102,6 @@
             </div>
           </article>
         </div>
-        <div class="column" style="display: none;" id="classification_column">
-          <article class="message is-dark">
-            <div class="message-header">
-              <p>Classification</p>
-            </div>
-            <div class="message-body">
-              <p class="is-size-2">
-                0
-              </p>
-            </div>
-          </article>
-        </div>
         <div class="column" style="display: none;" id="confidence_column">
           <article class="message is-dark">
             <div class="message-header">
@@ -118,6 +114,34 @@
         </div>
       </div>
     </div>
+
+    <section class="section">
+      <div class="container">
+        <h1 class="title">Architecture</h1>
+        <h2 class="subtitle">Lorem ipsum dolor sit amet</h2>
+      </div>
+    </section>
+    <div class="container is-widescreen">
+      <div class="columns">
+        <div class="column" style="margin-left: 10px; margin-right: 10px;">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Nullam
+          vehicula ipsum a arcu cursus. Egestas congue quisque egestas diam in.
+          Sed elementum tempus egestas sed sed risus pretium quam. Erat
+          pellentesque adipiscing commodo elit at imperdiet. Pretium lectus quam
+          id leo in. Commodo nulla facilisi nullam vehicula. Condimentum mattis
+          pellentesque id nibh tortor id aliquet lectus proin. Id consectetur
+          purus ut faucibus pulvinar. Aenean euismod elementum nisi quis
+          eleifend quam adipiscing. Magnis dis parturient montes nascetur
+          ridiculus mus mauris vitae ultricies. In ante metus dictum at. Duis
+          tristique sollicitudin nibh sit amet commodo nulla.
+        </div>
+        <div class="column is-narrow">
+          <figure class="image"><img src="sample_arch.png" /></figure>
+        </div>
+      </div>
+    </div>
+    <br />
 
     <footer class="footer" style="margin-top: 10px;">
       <nav class="level">
