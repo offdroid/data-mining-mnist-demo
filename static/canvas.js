@@ -8,12 +8,15 @@ clearButton.addEventListener("click", () => {
   // Clear both canvases
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   previewCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
   changeOutputVisibility(false);
 });
 
+ctx.fillStyle = "black";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
 ctx.lineCap = "round";
 ctx.lineWidth = 15;
-ctx.strokeStyle = "#FFFFFF";
+ctx.strokeStyle = "white";
 
 let drawing = false;
 canvas.addEventListener("mousedown", (e) => {
