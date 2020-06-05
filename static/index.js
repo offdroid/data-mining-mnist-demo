@@ -30,9 +30,8 @@ function changeOutputVisibility(visible) {
 }
 
 let predictions;
-const rgb = tf.tensor1d([0.2989, 0.587, 0.114]);
 async function classify() {
-  const model = await tf.loadLayersModel("model.json");
+  const model = await tf.loadLayersModel("./model.json");
 
   changeOutputVisibility(true);
   // Render the preview aka what the network receives
