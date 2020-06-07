@@ -10,6 +10,7 @@ clearButton.addEventListener("click", () => {
   previewCtx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   changeOutputVisibility(false);
+  stopDraw();
 });
 
 ctx.fillStyle = "black";
@@ -31,14 +32,14 @@ canvas.addEventListener("click", (e) => {
   drawing = false;
 });
 canvas.addEventListener("mousemove", draw);
-canvas.addEventListener("mouseup", () => stopDraw());
-canvas.addEventListener("mouseout", () => stopDraw());
+canvas.addEventListener("mouseup", stopDraw);
+canvas.addEventListener("mouseout", stopDraw);
 setupTouchInput(canvas);
 
 let position = { x: 0, y: 0 };
 
 function stopDraw() {
-  isDrawing = false;
+  drawing = false;
 }
 
 function updatePosition(e) {
