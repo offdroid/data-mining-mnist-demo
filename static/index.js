@@ -41,8 +41,8 @@ async function classify() {
   tensor = tensor.mean(2).div(255).toFloat().expandDims(-1);
   tf.browser.toPixels(tensor, document.querySelector("#previewCanvas"));
 
-  // For some reason the converted model, wants an extra dimension.
-  // no idea why but .expandDims(0) is a workaround
+  // Expand the tensor to the same shape used in training,
+  // equivalent to a mini-batch (batch of one image)
   predictions = model.predict(tensor.expandDims(0)).dataSync();
   // Find the most likely prediction
   const max_confidence = predictions.reduce(function (a, b) {
